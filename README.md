@@ -12,6 +12,8 @@
 	- [x] Xib과 VC연결, 등록
 	- [ ] FixedMemo, Memo를 Section으로 구분
 		* Fix가 없을 때, Fixed Section을 숨김처리
+		* ![2021-11-09_03-07-37](/Users/sseungmn/Library/Containers/com.majimakHARU.GrabIt/Data/2021-11-09_03-07-37.png)
+		* HeaderTitle이 왜 이렇게 leftInset이 들어가는지 모르겠음
 * 메모 Title
 	* [ ] 메모 개수를 Title로 설정
 	* [ ] 이거 navigation Large title??

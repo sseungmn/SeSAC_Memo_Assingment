@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,29 +24,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="고정된 메모" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgJ-ny-YsR">
-                                <rect key="frame" x="20" y="212" width="92" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PB1-Js-hVM">
-                                <rect key="frame" x="20" y="244" width="374" height="174"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PB1-Js-hVM">
+                                <rect key="frame" x="0.0" y="207" width="414" height="625"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="174" id="OfL-Z1-34R"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="BWi-cy-Ook"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Vqp-18-XcJ"/>
-                                </connections>
+                                <color key="separatorColor" name="contentColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메모" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYh-z2-nOx">
-                                <rect key="frame" x="20" y="426" width="35" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Idp-C3-1gr">
                                 <rect key="frame" x="373.5" y="840" width="20.5" height="22"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -55,47 +39,30 @@
                                 <rect key="frame" x="10" y="146" width="394" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Oys-9P-53t">
-                                <rect key="frame" x="20" y="458" width="374" height="374"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="VRa-J3-rhm"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="bO3-lh-bk7"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Idp-C3-1gr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="5nJ-VN-KZy"/>
-                            <constraint firstItem="Idp-C3-1gr" firstAttribute="top" secondItem="Oys-9P-53t" secondAttribute="bottom" constant="8" symbolic="YES" id="7ui-zd-Ey9"/>
+                            <constraint firstItem="PB1-Js-hVM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CHb-L5-VTS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="R3w-sS-cYi" secondAttribute="trailing" constant="165" id="CJn-pD-T3H"/>
-                            <constraint firstItem="ZYh-z2-nOx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="DbU-kb-Bqy"/>
                             <constraint firstItem="Jkw-bL-orM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="EbP-G1-TEU"/>
-                            <constraint firstItem="R3w-sS-cYi" firstAttribute="leading" secondItem="HgJ-ny-YsR" secondAttribute="leading" id="HdS-dk-2Vm"/>
                             <constraint firstItem="Idp-C3-1gr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Iod-L7-oVJ"/>
-                            <constraint firstItem="PB1-Js-hVM" firstAttribute="top" secondItem="HgJ-ny-YsR" secondAttribute="bottom" constant="8" symbolic="YES" id="Rit-Od-Ogi"/>
+                            <constraint firstItem="Idp-C3-1gr" firstAttribute="top" secondItem="PB1-Js-hVM" secondAttribute="bottom" constant="8" symbolic="YES" id="P2X-PK-KHT"/>
+                            <constraint firstItem="PB1-Js-hVM" firstAttribute="top" secondItem="Jkw-bL-orM" secondAttribute="bottom" constant="10" id="Pcc-TM-vvK"/>
                             <constraint firstItem="R3w-sS-cYi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="U67-s3-lhC"/>
-                            <constraint firstItem="HgJ-ny-YsR" firstAttribute="top" secondItem="Jkw-bL-orM" secondAttribute="bottom" constant="15" id="Xv7-rS-uxP"/>
-                            <constraint firstItem="Oys-9P-53t" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ZL8-TJ-sNp"/>
                             <constraint firstItem="R3w-sS-cYi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="gbr-oV-red"/>
-                            <constraint firstItem="PB1-Js-hVM" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="heF-Kl-1f3"/>
-                            <constraint firstItem="Oys-9P-53t" firstAttribute="top" secondItem="ZYh-z2-nOx" secondAttribute="bottom" constant="8" symbolic="YES" id="iyn-IC-Hr2"/>
-                            <constraint firstItem="HgJ-ny-YsR" firstAttribute="leading" secondItem="PB1-Js-hVM" secondAttribute="leading" id="j6g-BP-HD9"/>
-                            <constraint firstItem="Oys-9P-53t" firstAttribute="trailing" secondItem="Idp-C3-1gr" secondAttribute="trailing" id="mJN-z1-QFa"/>
                             <constraint firstItem="Jkw-bL-orM" firstAttribute="top" secondItem="R3w-sS-cYi" secondAttribute="bottom" id="mu8-2r-Bex"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PB1-Js-hVM" secondAttribute="trailing" id="ofh-MU-u51"/>
                             <constraint firstItem="Jkw-bL-orM" firstAttribute="centerX" secondItem="PB1-Js-hVM" secondAttribute="centerX" id="olq-F5-gOp"/>
-                            <constraint firstItem="PB1-Js-hVM" firstAttribute="trailing" secondItem="Oys-9P-53t" secondAttribute="trailing" id="tBa-O3-RcV"/>
-                            <constraint firstItem="ZYh-z2-nOx" firstAttribute="top" secondItem="PB1-Js-hVM" secondAttribute="bottom" constant="8" symbolic="YES" id="vwr-SS-Jyq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Idp-C3-1gr" secondAttribute="trailing" constant="20" id="xAX-O4-i6v"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addMemoButton" destination="Idp-C3-1gr" id="gGw-b1-3AM"/>
-                        <outlet property="fixedMemoTableView" destination="PB1-Js-hVM" id="92i-jm-G9U"/>
                         <outlet property="memoCountLabel" destination="R3w-sS-cYi" id="iYj-zM-F6L"/>
-                        <outlet property="memoTableView" destination="Oys-9P-53t" id="qxi-Kr-2vh"/>
                         <outlet property="searchBar" destination="Jkw-bL-orM" id="uqN-qV-IOb"/>
+                        <outlet property="tableView" destination="PB1-Js-hVM" id="Dv5-Se-aVt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -105,6 +72,9 @@
     </scenes>
     <resources>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+        <namedColor name="contentColor">
+            <color red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -24,7 +24,7 @@ class MemoTableViewCell: UITableViewCell {
         writeDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         // attribute
-        self.backgroundColor = .clear
+        self.backgroundColor = .darkBackground
         titleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         
         writeDateLabel.font = .systemFont(ofSize: 13)
