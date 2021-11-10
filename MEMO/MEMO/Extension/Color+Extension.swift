@@ -8,15 +8,10 @@
 import UIKit
 
 extension UIColor {
-    static var contentGray: UIColor {
-       return UIColor(named: "contentColor")!
+    static var customBlack: UIColor {
+        return UIColor(named: "customBlack")!
     }
-    
-    static var darkBackground: UIColor {
-        return UIColor(named: "darkBG")!
-    }
-    
-    static var lightBackground: UIColor {
-        return UIColor(named: "lightBG")!
+    static var navigationBackground: UIColor {
+        return UIColor(named: "navigationBG")!
     }
 }

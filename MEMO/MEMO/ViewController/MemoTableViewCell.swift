@@ -21,22 +21,20 @@ class MemoTableViewCell: UITableViewCell {
         
         // asslignment
         stackView.spacing = 10
-        writeDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+//        stackView.distribution = .fill
+//        writeDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+//        contentLabel.setcontent
         
         // attribute
-        self.backgroundColor = .darkBackground
-        titleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        titleLabel.font = .cellTitle
         
-        writeDateLabel.font = .systemFont(ofSize: 13)
-        writeDateLabel.textColor = .gray
-        contentLabel.font = .systemFont(ofSize: 13)
-        contentLabel.textColor = .gray
+        writeDateLabel.font = .cellContent
+        contentLabel.font = .cellContent
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }

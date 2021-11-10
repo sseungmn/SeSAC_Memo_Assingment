@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    func toString() -> String {
+    func toFormattedString() -> String {
         let calendar = Calendar.current
         let today = Date()
         let formatter = DateFormatter()
@@ -21,5 +21,13 @@ extension Date {
             formatter.dateFormat = "yyyy.MM.dd a hh:mm"
         }
         return formatter.string(from: self)
+    }
+}
+
+extension Int {
+    func toFormattedNumber() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter.string(for: self)!
     }
 }

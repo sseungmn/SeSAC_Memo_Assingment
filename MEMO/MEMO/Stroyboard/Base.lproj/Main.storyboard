@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k6u-RZ-EXj">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -18,14 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234개의 메모" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3w-sS-cYi">
-                                <rect key="frame" x="20" y="104" width="229" height="42"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PB1-Js-hVM">
-                                <rect key="frame" x="0.0" y="207" width="414" height="625"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="744"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" name="contentColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -34,38 +28,48 @@
                                 <rect key="frame" x="373.5" y="840" width="20.5" height="22"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="square.and.pencil" catalog="system"/>
+                                <connections>
+                                    <action selector="addMemoButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dn0-TI-81m"/>
+                                </connections>
                             </button>
-                            <searchBar contentMode="redraw" text="" placeholder="검색" translatesAutoresizingMaskIntoConstraints="NO" id="Jkw-bL-orM">
-                                <rect key="frame" x="10" y="146" width="394" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Idp-C3-1gr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="5nJ-VN-KZy"/>
                             <constraint firstItem="PB1-Js-hVM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CHb-L5-VTS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="R3w-sS-cYi" secondAttribute="trailing" constant="165" id="CJn-pD-T3H"/>
-                            <constraint firstItem="Jkw-bL-orM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="EbP-G1-TEU"/>
                             <constraint firstItem="Idp-C3-1gr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Iod-L7-oVJ"/>
                             <constraint firstItem="Idp-C3-1gr" firstAttribute="top" secondItem="PB1-Js-hVM" secondAttribute="bottom" constant="8" symbolic="YES" id="P2X-PK-KHT"/>
-                            <constraint firstItem="PB1-Js-hVM" firstAttribute="top" secondItem="Jkw-bL-orM" secondAttribute="bottom" constant="10" id="Pcc-TM-vvK"/>
-                            <constraint firstItem="R3w-sS-cYi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="U67-s3-lhC"/>
-                            <constraint firstItem="R3w-sS-cYi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="gbr-oV-red"/>
-                            <constraint firstItem="Jkw-bL-orM" firstAttribute="top" secondItem="R3w-sS-cYi" secondAttribute="bottom" id="mu8-2r-Bex"/>
+                            <constraint firstItem="PB1-Js-hVM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="nSE-Yd-035"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PB1-Js-hVM" secondAttribute="trailing" id="ofh-MU-u51"/>
-                            <constraint firstItem="Jkw-bL-orM" firstAttribute="centerX" secondItem="PB1-Js-hVM" secondAttribute="centerX" id="olq-F5-gOp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Idp-C3-1gr" secondAttribute="trailing" constant="20" id="xAX-O4-i6v"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="IGp-l4-BiO"/>
                     <connections>
                         <outlet property="addMemoButton" destination="Idp-C3-1gr" id="gGw-b1-3AM"/>
-                        <outlet property="memoCountLabel" destination="R3w-sS-cYi" id="iYj-zM-F6L"/>
-                        <outlet property="searchBar" destination="Jkw-bL-orM" id="uqN-qV-IOb"/>
                         <outlet property="tableView" destination="PB1-Js-hVM" id="Dv5-Se-aVt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="735" y="60"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Vc9-ZC-eYD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k6u-RZ-EXj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ndk-jB-szb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eiX-53-kre"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LkV-t7-sYw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-10.144927536231885" y="59.598214285714285"/>
         </scene>
