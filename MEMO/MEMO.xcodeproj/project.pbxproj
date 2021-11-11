@@ -24,6 +24,7 @@
 		FD64C669273934EB000A9B55 /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD64C668273934EB000A9B55 /* Formatter+Extension.swift */; };
 		FD64C66B27394CAD000A9B55 /* Searchbar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD64C66A27394CAC000A9B55 /* Searchbar+Extension.swift */; };
 		FD64C66D27394EB6000A9B55 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD64C66C27394EB6000A9B55 /* Color+Extension.swift */; };
+		FD7A0B56273D8251003C4E04 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A0B55273D8251003C4E04 /* UILabel+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		FD64C668273934EB000A9B55 /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
 		FD64C66A27394CAC000A9B55 /* Searchbar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Searchbar+Extension.swift"; sourceTree = "<group>"; };
 		FD64C66C27394EB6000A9B55 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		FD7A0B55273D8251003C4E04 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				FD64C66C27394EB6000A9B55 /* Color+Extension.swift */,
 				FD0C698B273A5FC900A7955B /* Font+Extension.swift */,
 				FD0AC783273C2A6A0068FAE4 /* Alert+Extension.swift */,
+				FD7A0B55273D8251003C4E04 /* UILabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				FD1BAC48273907D2003B9693 /* SceneDelegate.swift in Sources */,
 				FD64C65B27391812000A9B55 /* MemoTableViewCell.swift in Sources */,
 				FD0C698C273A5FC900A7955B /* Font+Extension.swift in Sources */,
+				FD7A0B56273D8251003C4E04 /* UILabel+Extension.swift in Sources */,
 				FD64C66B27394CAD000A9B55 /* Searchbar+Extension.swift in Sources */,
 				FD64C669273934EB000A9B55 /* Formatter+Extension.swift in Sources */,
 				FD64C66D27394EB6000A9B55 /* Color+Extension.swift in Sources */,

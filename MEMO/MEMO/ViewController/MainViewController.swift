@@ -7,7 +7,7 @@
 
 import UIKit
 import RealmSwift
-import Network
+//import Network
 
 class MainViewController: UIViewController {
     
@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
     
     var filteredFixedMemoList: Results<Memo>!
     var filteredMemoList: Results<Memo>!
+    var searchText: String!
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -130,9 +131,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("FAIL : Invalid Section")
         }
         
-        print(row)
         cell.titleLabel.text = row.title
         cell.contentLabel.text = row.content
+        if isFiltering() && !searchBarIsEmpty() {
+            cell.titleLabel.highlight(searchText: searchText)
+            cell.contentLabel.highlight(searchText: searchText)
+        } else if !isFiltering() {
+            cell.titleLabel.nohighlight()
+            cell.contentLabel.nohighlight()
+        }
         cell.writeDateLabel.text = row.writeDate.toFormattedString()
         
         return cell
@@ -155,10 +162,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             var text: String {
                 switch section {
                 case 0:
-                    if isFiltering() { return "고정된 메모(\(filteredFixedMemoList.count))개 찾음"}
+                    if isFiltering() { return "고정된 메모: \(filteredFixedMemoList.count)개 찾음"}
                     else { return "고정된 메모" }
                 case 1:
-                    if isFiltering() { return "메모(\(filteredMemoList.count))개 찾음"}
+                    if isFiltering() { return "메모 : \(filteredMemoList.count)개 찾음"}
                     else { return "메모" }
                 default:
                     fatalError("FAIL : Invalid Section")
@@ -290,9 +297,10 @@ extension MainViewController {
 }
 
 // MARK: - Search
-extension MainViewController: UISearchResultsUpdating {
+extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func setSearchBar() {
+        searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "검색"
@@ -300,10 +308,25 @@ extension MainViewController: UISearchResultsUpdating {
         definesPresentationContext = true
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if searchController.searchBar.searchTextField.isEditing {
+            print("Search Button Clicked")
+            searchController.searchBar.endEditing(true)
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if searchController.searchBar.searchTextField.isEditing {
+            print("Dragging TableView")
+            searchController.searchBar.endEditing(true)
+        }
+    }
+    
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text {
             filterFixedMemoForSearchText(text)
             filterMemoForSearchText(text)
+            searchText  = text
         }
     }
     
@@ -318,6 +341,7 @@ extension MainViewController: UISearchResultsUpdating {
     func filterFixedMemoForSearchText(_ searchText: String, scope: String = "All") {
         filteredFixedMemoList = fixedMemoList.where {
             $0.title.contains(searchText, options: .caseInsensitive)
+            || $0.content.contains(searchText, options: .caseInsensitive)
         }
         
         tableView.reloadData()
@@ -326,6 +350,7 @@ extension MainViewController: UISearchResultsUpdating {
     func filterMemoForSearchText(_ searchText: String, scope: String = "All") {
         filteredMemoList = memoList.where {
             $0.title.contains(searchText, options: .caseInsensitive)
+            || $0.content.contains(searchText, options: .caseInsensitive)
         }
         
         tableView.reloadData()
