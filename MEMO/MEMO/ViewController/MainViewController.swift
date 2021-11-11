@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Network
 
 class MainViewController: UIViewController {
     
@@ -22,6 +23,12 @@ class MainViewController: UIViewController {
             tableView.reloadData()
         }
     }
+    
+    var filteredFixedMemoList: Results<Memo>!
+    var filteredMemoList: Results<Memo>!
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
     @IBAction func addMemoButtonClicked(_ sender: UIButton) {
         tableView.reloadData()
     }
@@ -33,7 +40,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setData()
         setUI()
-        setDelegate()
+        setTableDelegate()
         registerXib()
         
     }
@@ -53,9 +60,7 @@ class MainViewController: UIViewController {
     func setUI() {
         tableView.separatorInset = .zero
         
-        // searchBar
-        let searchBar = UISearchController(searchResultsController: nil)
-        self.navigationItem.searchController = searchBar
+        setSearchBar()
         
         let memoCount: Int = fixedMemoList.count + memoList.count
         navigationItem.title = "\(memoCount.toFormattedNumber())개의 메모"
@@ -73,9 +78,9 @@ class MainViewController: UIViewController {
     
 }
 
-// MARK: - tableView
+// MARK: - TableView
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    func setDelegate() {
+    func setTableDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -89,9 +94,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return fixedMemoList.count
+            if isFiltering() { return filteredFixedMemoList.count }
+            else { return fixedMemoList.count }
         case 1:
-            return memoList.count
+            if isFiltering() { return filteredMemoList.count }
+            else { return memoList.count }
         default:
             fatalError("FAIL : Invalid Section")
             
@@ -114,13 +121,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let row: Memo
         switch indexPath.section {
         case 0:
-            row = fixedMemoList[indexPath.row]
+            if isFiltering() { row = filteredFixedMemoList[indexPath.row] }
+            else { row = fixedMemoList[indexPath.row] }
         case 1:
-            row = memoList[indexPath.row]
+            if isFiltering() { row = filteredMemoList[indexPath.row] }
+            else { row = memoList[indexPath.row] }
         default:
             fatalError("FAIL : Invalid Section")
         }
         
+        print(row)
         cell.titleLabel.text = row.title
         cell.contentLabel.text = row.content
         cell.writeDateLabel.text = row.writeDate.toFormattedString()
@@ -145,9 +155,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             var text: String {
                 switch section {
                 case 0:
-                    return "고정된 메모"
+                    if isFiltering() { return "고정된 메모(\(filteredFixedMemoList.count))개 찾음"}
+                    else { return "고정된 메모" }
                 case 1:
-                    return "메모"
+                    if isFiltering() { return "메모(\(filteredMemoList.count))개 찾음"}
+                    else { return "메모" }
                 default:
                     fatalError("FAIL : Invalid Section")
                 }
@@ -172,11 +184,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 && fixedMemoList.count == 0 {
-            return 0
+        if section == 0 {
+            if isFiltering() && filteredFixedMemoList.count == 0 { return 0 }
+            else if !isFiltering() && fixedMemoList.count == 0 { return 0 }
         }
-        if section == 1 && memoList.count == 0 {
-            return 0
+        if section == 1 {
+            if isFiltering() && filteredMemoList.count == 0 { return 0 }
+            else if !isFiltering() && memoList.count == 0 { return 0 }
         }
         return 55
     }
@@ -200,9 +214,11 @@ extension MainViewController {
     func getTargetMemo(indexPath: IndexPath) -> Memo {
         switch indexPath.section {
         case 0:
-            return fixedMemoList[indexPath.row]
+            if isFiltering() { return filteredFixedMemoList[indexPath.row] }
+            else { return fixedMemoList[indexPath.row] }
         case 1:
-            return memoList[indexPath.row]
+            if isFiltering() { return filteredMemoList[indexPath.row]}
+            else { return memoList[indexPath.row] }
         default:
             fatalError("FAIL : Invalid Section")
         }
@@ -253,8 +269,13 @@ extension MainViewController {
                 }
                 self.tableView.reloadData()
             })
+            
             fix.backgroundColor = .orange
-            fix.image = UIImage(systemName: "pin.fill")
+            if self.getTargetMemo(indexPath: indexPath).fixed {
+                fix.image = UIImage(systemName: "pin.slash.fill")
+            } else {
+                fix.image = UIImage(systemName: "pin.fill")
+            }
             
             let action = UISwipeActionsConfiguration(actions: [fix])
             action.performsFirstActionWithFullSwipe = false
@@ -264,6 +285,50 @@ extension MainViewController {
         }
         return leadingSwipeAction
         
+    }
+    
+}
+
+// MARK: - Search
+extension MainViewController: UISearchResultsUpdating {
+    
+    func setSearchBar() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "검색"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text {
+            filterFixedMemoForSearchText(text)
+            filterMemoForSearchText(text)
+        }
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    func filterFixedMemoForSearchText(_ searchText: String, scope: String = "All") {
+        filteredFixedMemoList = fixedMemoList.where {
+            $0.title.contains(searchText, options: .caseInsensitive)
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func filterMemoForSearchText(_ searchText: String, scope: String = "All") {
+        filteredMemoList = memoList.where {
+            $0.title.contains(searchText, options: .caseInsensitive)
+        }
+        
+        tableView.reloadData()
     }
     
 }
