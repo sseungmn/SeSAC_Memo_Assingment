@@ -18,6 +18,19 @@ extension UIViewController {
         }
     }
     
+    func edit(memo: Memo, title: String?, content: String?) {
+        let localRealm = try! Realm()
+        let task = localRealm.objects(Memo.self).where {
+            $0._id == memo._id
+        }.first!
+        
+        try! localRealm.write {
+            if title != nil || content != nil { task.modifiedDate = Date() }
+            if title != nil { task.title = title! }
+            if content != nil { task.content = content! }
+        }
+    }
+    
     func delete(memo: Memo) {
         let localRealm = try! Realm()
         

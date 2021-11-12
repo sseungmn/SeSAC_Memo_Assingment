@@ -19,6 +19,7 @@
 		* iOS 14.0 에서 버그 수정 완료. `UIListContentConfiguration`
 		* iOS 13.0 에서는 그대로 놔둠
 	- [x] Header height 예시와 맞게 조정 (55), Footer (0) (21.11.09)
+	- [x] Content가 없을 때, "추가 텍스트 없음" 으로 표시 (21.11.12)
 * NavigationBar
 	- [x] NavigationBar에서 LargeTitle, searchBar 구현
 		- [x] LargetTitle 적용
@@ -63,6 +64,18 @@
 - [x] 스크롤을 하거나 검색버튼을 누르면 키보드가 내려감 (21.11.11)
 
 ## 작성 / 수정 화면
+- [x] 진입 화면에 따라서, backbutton title이 다름 (21.11.12)
+- [x] share, 완료버튼 생성 (21.11.12)
+	* `naviagtionItem.rightBarButtonItems`에 추가.
+	* 편집상태가 시작될 때, 추가되도록 수정 (21.11.12)
+- [x] 전체 텍스트를 제목, 내용으로 나눠서 저장
+	* 완료, 편집상태가 끝, 백버튼액션, 제스쳐로 이전화면 모두 popView로 하고 `viewWillDisappear()`일 때, 저장하도록 설정 (21.11.12)
+	* `component(["\n"])`->`removeFirst()`로 제목을 추출
+	* 나머지를 `reduce()`로 합침, 나눠진 목록마다 사이에 개행문자 삽입
+- [x] `수정`일 때에는, 해당 메모의 정보를 불러와서 수정할 수 있게 함. (21.11.12)
+	* RealmQuery에 edit함수 추가
+- [x] `추가`일 때에는, 빈 메모를 생성 (21.11.12)
+- [x] 공유버튼 누르면 텍스트 저장 (21.11.12)
 
 ## 기능 녹화
 * iPhone 8, iPhone 13 Pro Max로 녹화영상

@@ -30,10 +30,6 @@ class MainViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    @IBAction func addMemoButtonClicked(_ sender: UIButton) {
-        tableView.reloadData()
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addMemoButton: UIButton!
     
@@ -43,19 +39,25 @@ class MainViewController: UIViewController {
         setUI()
         setTableDelegate()
         registerXib()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
         
+        let memoCount: Int = fixedMemoList.count + memoList.count
+        navigationItem.title = "\(memoCount.toFormattedNumber())개의 메모"
     }
     
     func setData() {
         fixedMemoList = localRealm.objects(Memo.self)
             .filter("fixed == true")
-            .sorted(byKeyPath: "writeDate", ascending: true)
+            .sorted(byKeyPath: "writtenDate", ascending: true)
         memoList = localRealm.objects(Memo.self)
             .filter("fixed == false")
-            .sorted(byKeyPath: "writeDate", ascending: true)
+            .sorted(byKeyPath: "writtenDate", ascending: true)
         
         print("Realm is located in \(localRealm.configuration.fileURL!)")
-        
     }
 
     func setUI() {
@@ -63,8 +65,6 @@ class MainViewController: UIViewController {
         
         setSearchBar()
         
-        let memoCount: Int = fixedMemoList.count + memoList.count
-        navigationItem.title = "\(memoCount.toFormattedNumber())개의 메모"
         navigationController?.navigationBar.backgroundColor = .navigationBackground
         
         // LargeTitle
@@ -74,9 +74,7 @@ class MainViewController: UIViewController {
         } else {
             navigationItem.largeTitleDisplayMode = .always
         }
-        
     }
-    
 }
 
 // MARK: - TableView
@@ -84,12 +82,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func setTableDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,16 +98,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             else { return memoList.count }
         default:
             fatalError("FAIL : Invalid Section")
-            
         }
-        
     }
     
     // MARK: Cell
     func registerXib() {
         let nibName = UINib(nibName: MemoTableViewCell.identifier, bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: MemoTableViewCell.identifier)
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,7 +125,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.titleLabel.text = row.title
-        cell.contentLabel.text = row.content
+        cell.contentLabel.text = row.content ?? "추가 텍스트 없음"
         if isFiltering() && !searchBarIsEmpty() {
             cell.titleLabel.highlight(searchText: searchText)
             cell.contentLabel.highlight(searchText: searchText)
@@ -140,10 +133,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.titleLabel.nohighlight()
             cell.contentLabel.nohighlight()
         }
-        cell.writeDateLabel.text = row.writeDate.toFormattedString()
+        cell.writtenDate.text = row.writtenDate.toFormattedString()
         
         return cell
-        
     }
     
     // MARK: Header
@@ -187,7 +179,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return tmp
         }
         return headerView
-
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -252,10 +243,8 @@ extension MainViewController {
             let action = UISwipeActionsConfiguration(actions: [delete])
             action.performsFirstActionWithFullSwipe = false
             return action
-            
         }
         return trailingSwipeAction
-        
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -288,12 +277,9 @@ extension MainViewController {
             action.performsFirstActionWithFullSwipe = false
             
             return action
-            
         }
         return leadingSwipeAction
-        
     }
-    
 }
 
 // MARK: - Search
@@ -343,7 +329,6 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
             $0.title.contains(searchText, options: .caseInsensitive)
             || $0.content.contains(searchText, options: .caseInsensitive)
         }
-        
         tableView.reloadData()
     }
     
@@ -352,8 +337,33 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
             $0.title.contains(searchText, options: .caseInsensitive)
             || $0.content.contains(searchText, options: .caseInsensitive)
         }
-        
         tableView.reloadData()
     }
     
+}
+
+// MARK: - Editor
+extension MainViewController {
+    
+    @IBAction func addMemoButtonClicked(_ sender: UIButton) {
+        showEditStoryborad(memo: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showEditStoryborad(memo: self.getTargetMemo(indexPath: indexPath))
+    }
+    
+    func showEditStoryborad(memo: Memo?) {
+        let sb = UIStoryboard(name: "Edit", bundle: nil)
+        
+        let vc = sb.instantiateViewController(withIdentifier: EditViewController.identification) as! EditViewController
+        
+        if memo == nil {
+            self.navigationItem.backButtonTitle = "메모"
+        } else {
+            self.navigationItem.backButtonTitle = "검색"
+            vc.memo = memo
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

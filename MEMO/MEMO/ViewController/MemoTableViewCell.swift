@@ -13,7 +13,7 @@ class MemoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak private var stackView: UIStackView!
-    @IBOutlet weak var writeDateLabel: UILabel!
+    @IBOutlet weak var writtenDate: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
     override func awakeFromNib() {
@@ -21,14 +21,11 @@ class MemoTableViewCell: UITableViewCell {
         
         // asslignment
         stackView.spacing = 10
-//        stackView.distribution = .fill
-//        writeDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-//        contentLabel.setcontent
         
         // attribute
         titleLabel.font = .cellTitle
         
-        writeDateLabel.font = .cellContent
+        writtenDate.font = .cellContent
         contentLabel.font = .cellContent
     }
 

@@ -55,7 +55,7 @@
                 <outlet property="contentLabel" destination="Zzs-ld-CDp" id="VKi-xq-zIF"/>
                 <outlet property="stackView" destination="bcy-ne-3ZN" id="KWN-Rp-UHS"/>
                 <outlet property="titleLabel" destination="sh1-Xa-Dmf" id="fH0-vg-KeD"/>
-                <outlet property="writeDateLabel" destination="GwS-Dh-mkk" id="Ba7-EA-ZgC"/>
+                <outlet property="writtenDate" destination="GwS-Dh-mkk" id="Ba7-EA-ZgC"/>
             </connections>
             <point key="canvasLocation" x="132.60869565217394" y="71.651785714285708"/>
         </tableViewCell>

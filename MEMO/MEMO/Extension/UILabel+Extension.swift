@@ -7,6 +7,8 @@
 
 import UIKit
 
+// https://gist.github.com/mlabraca/162d0fc08a135a09af509890f4aa9643
+
 extension UILabel {
     func highlight(searchText: String, color: UIColor = .orange) {
        guard let labelText = self.text else { return }
@@ -28,7 +30,7 @@ extension UILabel {
        guard let labelText = self.text else { return }
        let mutableString = NSMutableAttributedString(string: labelText)
        mutableString.addAttribute(NSAttributedString.Key.foregroundColor,
-                                  value: UIColor.black,
+                                  value: UIColor.customBlack,
                                   range: NSRange(location: 0, length: labelText.count))
        self.attributedText = mutableString
     }
