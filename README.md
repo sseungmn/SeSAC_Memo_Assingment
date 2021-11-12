@@ -65,6 +65,7 @@
 
 ## 작성 / 수정 화면
 - [x] 진입 화면에 따라서, backbutton title이 다름 (21.11.12)
+- [x] View에 들어가자마자 편집상태 시작 (21.11.12)
 - [x] share, 완료버튼 생성 (21.11.12)
 	* `naviagtionItem.rightBarButtonItems`에 추가.
 	* 편집상태가 시작될 때, 추가되도록 수정 (21.11.12)
