@@ -79,5 +79,8 @@
 - [x] 공유버튼 누르면 텍스트 저장 (21.11.12)
 
 ## 기능 녹화
+
 * iPhone 8, iPhone 13 Pro Max로 녹화영상
+	* iPhone 13 Pro Max
+	* ![13ProMax](https://user-images.githubusercontent.com/46219689/141441082-6b1cd1e9-84c0-4575-bb14-1210b865b514.gif)
 * 최소 10개의 메모 등록 후 녹화, README.md에 첨부
